@@ -7,7 +7,7 @@ window.onload = () => {
     if (savedNote) {
         noteArea.innerText = savedNote;
     }
-    showHistory();
+    showHistory();  // Mostrar el historial correctamente al cargar la página
 };
 
 // Guardar automáticamente la nota mientras el usuario escribe
@@ -37,17 +37,17 @@ function downloadNote() {
     }
   
     let fileName = note.split(/\s+/).slice(0, 3).join("_") || "nota"; // Primeras 3 palabras
-      fileName = fileName.replace(/[^\w\d_-]/g, ""); // Remover caracteres especiales
-      fileName += ".txt";
+    fileName = fileName.replace(/[^\w\d_-]/g, ""); // Remover caracteres especiales
+    fileName += ".txt";
   
-      const blob = new Blob([note], { type: "text/plain" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = fileName;
-      link.click();
+    const blob = new Blob([note], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName;
+    link.click();
   
-      addToHistory(fileName); // Agregar al historial
-  }
+    addToHistory(fileName); // Agregar al historial
+}
 
 
 function searchWord() {
@@ -76,20 +76,20 @@ function toggleHistory() {
     const history = document.getElementById("history");
     history.style.display = history.style.display === "block" ? "none" : "block";
     if (history.style.display === "block") {
-        showHistory();
+        showHistory();  // Mostrar historial cuando esté visible
     }
 }
 
 function addToHistory(fileName) {
-    let history = JSON.parse(localStorage.getItem("downloadHistory")) || [];
+    let history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos la misma clave 'downloadHistory'
     history.push(fileName);
-    localStorage.setItem("downloadHistory", JSON.stringify(history));
+    localStorage.setItem("downloadHistory", JSON.stringify(history));  // Guardamos historial con 'downloadHistory'
 }
 
 
 function showHistory() {
     const historyList = document.getElementById("historyList");
-    const history = JSON.parse(localStorage.getItem("history")) || [];
+    const history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos la misma clave 'downloadHistory'
     historyList.innerHTML = history.length === 0 ? "<p>No hay historial disponible.</p>" : "";
 
     history.forEach((fileName, index) => {
@@ -101,8 +101,8 @@ function showHistory() {
 }
 
 function deleteHistory(index) {
-    let history = JSON.parse(localStorage.getItem("history")) || [];
+    let history = JSON.parse(localStorage.getItem("downloadHistory")) || [];
     history.splice(index, 1);
-    localStorage.setItem("history", JSON.stringify(history));
-    showHistory();
+    localStorage.setItem("downloadHistory", JSON.stringify(history));
+    showHistory();  // Mostrar historial después de eliminar
 }
