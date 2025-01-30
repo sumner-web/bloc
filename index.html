@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloc de Notas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <button class="menu-button" onclick="toggleHistory()">☰</button>
+    <span>📝 Bloc de Notas</span>
+  </header>
+
+  <main>
+    <div id="noteArea" contenteditable="true" class="note-area" placeholder="Escribe tus notas aquí..."></div>
+
+    <div class="search">
+      <input id="searchInput" type="text" placeholder="Buscar palabra...">
+      <button onclick="searchWord()">Buscar</button>
+    </div>
+
+    <div class="buttons">
+      <button onclick="saveNote()">Guardar Nota</button>
+      <button onclick="clearNote()">Limpiar</button>
+      <button onclick="downloadNote()">Descargar</button>
+    </div>
+  </main>
+
+  <div id="history" class="history">
+    <div class="close-history" onclick="toggleHistory()">×</div>
+    <h3>Historial de Descargas</h3>
+    <div id="historyList"></div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
