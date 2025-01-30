@@ -81,10 +81,11 @@ function toggleHistory() {
 }
 
 function addToHistory(fileName) {
-    const history = JSON.parse(localStorage.getItem("history")) || [];
+    let history = JSON.parse(localStorage.getItem("downloadHistory")) || [];
     history.push(fileName);
-    localStorage.setItem("history", JSON.stringify(history));
+    localStorage.setItem("downloadHistory", JSON.stringify(history));
 }
+
 
 function showHistory() {
     const historyList = document.getElementById("historyList");
