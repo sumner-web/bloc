@@ -82,14 +82,14 @@ function toggleHistory() {
 }
 
 function addToHistory(fileName) {
-    const history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos const para evitar reasignar
+    const history = JSON.parse(localStorage.getItem("history")) || [];  
     history.push(fileName);
-    localStorage.setItem("downloadHistory", JSON.stringify(history));  // Guardamos historial con 'downloadHistory'
+    localStorage.setItem("history", JSON.stringify(history));
 }
 
 function showHistory() {
     const historyList = document.getElementById("historyList");
-    const history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos const para evitar reasignar
+    const history = JSON.parse(localStorage.getItem("history")) || [];  
     historyList.innerHTML = history.length === 0 ? "<p>No hay historial disponible.</p>" : "";
 
     history.forEach((fileName, index) => {
@@ -101,9 +101,9 @@ function showHistory() {
 }
 
 function deleteHistory(index) {
-    const history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos const para evitar reasignar
+    const history = JSON.parse(localStorage.getItem("history")) || [];  
     history.splice(index, 1);
-    localStorage.setItem("downloadHistory", JSON.stringify(history));
-    showHistory();  // Mostrar historial después de eliminar
+    localStorage.setItem("history", JSON.stringify(history));
+    showHistory();
 }
 
