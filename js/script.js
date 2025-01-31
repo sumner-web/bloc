@@ -32,8 +32,8 @@ function clearNote() {
 function downloadNote() {
     const note = noteArea.innerText;
     if (!note.trim()) {
-      alert("No hay contenido para descargar.");
-      return;
+        alert("No hay contenido para descargar.");
+        return;
     }
   
     let fileName = note.split(/\s+/).slice(0, 3).join("_") || "nota"; // Primeras 3 palabras
@@ -48,7 +48,6 @@ function downloadNote() {
   
     addToHistory(fileName); // Agregar al historial
 }
-
 
 function searchWord() {
     const text = noteArea.innerText;
@@ -86,18 +85,21 @@ function addToHistory(fileName) {
     localStorage.setItem("downloadHistory", JSON.stringify(history));  // Guardamos historial con 'downloadHistory'
 }
 
-
 function showHistory() {
     const historyList = document.getElementById("historyList");
     const history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos la misma clave 'downloadHistory'
-    historyList.innerHTML = history.length === 0 ? "<p>No hay historial disponible.</p>" : "";
-
-    history.forEach((fileName, index) => {
-        const div = document.createElement("div");
-        div.className = "history-item";
-        div.innerHTML = `<span>${fileName}</span> <button onclick="deleteHistory(${index})">🗑</button>`;
-        historyList.appendChild(div);
-    });
+    
+    if (history.length === 0) {
+        historyList.innerHTML = "<p>No hay historial disponible.</p>";
+    } else {
+        historyList.innerHTML = '';  // Limpiar cualquier mensaje previo
+        history.forEach((fileName, index) => {
+            const div = document.createElement("div");
+            div.className = "history-item";
+            div.innerHTML = `<span>${fileName}</span> <button onclick="deleteHistory(${index})">🗑</button>`;
+            historyList.appendChild(div);
+        });
+    }
 }
 
 function deleteHistory(index) {
