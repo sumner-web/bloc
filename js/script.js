@@ -47,6 +47,7 @@ function downloadNote() {
     link.click();
   
     addToHistory(fileName); // Agregar al historial
+    showHistory();
 }
 
 function searchWord() {
