@@ -80,31 +80,28 @@ function toggleHistory() {
 }
 
 function addToHistory(fileName) {
-    let history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos la misma clave 'downloadHistory'
+    const history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos const para evitar reasignar
     history.push(fileName);
     localStorage.setItem("downloadHistory", JSON.stringify(history));  // Guardamos historial con 'downloadHistory'
 }
 
 function showHistory() {
     const historyList = document.getElementById("historyList");
-    const history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos la misma clave 'downloadHistory'
-    
-    if (history.length === 0) {
-        historyList.innerHTML = "<p>No hay historial disponible.</p>";
-    } else {
-        historyList.innerHTML = '';  // Limpiar cualquier mensaje previo
-        history.forEach((fileName, index) => {
-            const div = document.createElement("div");
-            div.className = "history-item";
-            div.innerHTML = `<span>${fileName}</span> <button onclick="deleteHistory(${index})">🗑</button>`;
-            historyList.appendChild(div);
-        });
-    }
+    const history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos const para evitar reasignar
+    historyList.innerHTML = history.length === 0 ? "<p>No hay historial disponible.</p>" : "";
+
+    history.forEach((fileName, index) => {
+        const div = document.createElement("div");
+        div.className = "history-item";
+        div.innerHTML = `<span>${fileName}</span> <button onclick="deleteHistory(${index})">🗑</button>`;
+        historyList.appendChild(div);
+    });
 }
 
 function deleteHistory(index) {
-    let history = JSON.parse(localStorage.getItem("downloadHistory")) || [];
+    const history = JSON.parse(localStorage.getItem("downloadHistory")) || [];  // Usamos const para evitar reasignar
     history.splice(index, 1);
     localStorage.setItem("downloadHistory", JSON.stringify(history));
     showHistory();  // Mostrar historial después de eliminar
 }
+
