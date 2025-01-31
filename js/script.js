@@ -35,20 +35,21 @@ function downloadNote() {
         alert("No hay contenido para descargar.");
         return;
     }
-  
+
     let fileName = note.split(/\s+/).slice(0, 3).join("_") || "nota"; // Primeras 3 palabras
     fileName = fileName.replace(/[^\w\d_-]/g, ""); // Remover caracteres especiales
     fileName += ".txt";
-  
+
     const blob = new Blob([note], { type: "text/plain" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = fileName;
     link.click();
-  
-    addToHistory(fileName); // Agregar al historial
-    showHistory();
+
+    addToHistory(fileName);
+    showHistory();  // <-- Se actualiza la vista del historial inmediatamente
 }
+
 
 function searchWord() {
     const text = noteArea.innerText;
