@@ -36,7 +36,7 @@ function downloadNote() {
         return;
     }
 
-    let fileName = note.split(/\s+/).slice(0, 3).join("_") || "nota"; // Primeras 3 palabras
+    let fileName = note.split(/\\s+/).slice(0, 3).join("_") || "nota"; // Primeras 3 palabras
     fileName = fileName.replace(/[^\\w\\d_-]/g, ""); // Remover caracteres especiales
     fileName += ".txt";
 
