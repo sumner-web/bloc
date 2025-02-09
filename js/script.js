@@ -37,7 +37,7 @@ function downloadNote() {
     }
 
     let fileName = note.split(/\s+/).slice(0, 3).join("_") || "nota"; // Primeras 3 palabras
-    fileName = fileName.replace(/[^\w\d_-]/g, ""); // Remover caracteres especiales
+    fileName = fileName.replace(/[^\\w\\d_-]/g, ""); // Remover caracteres especiales
     fileName += ".txt";
 
     const blob = new Blob([note], { type: "text/plain" });
@@ -83,9 +83,10 @@ function toggleHistory() {
 
 function addToHistory(fileName) {
     const history = JSON.parse(localStorage.getItem("history")) || [];  
-    history.push(fileName);
+    history.push(fileName); // Asegúrate de que aquí se guarda el nombre del archivo
     localStorage.setItem("history", JSON.stringify(history));
 }
+
 
 function showHistory() {
     const historyList = document.getElementById("historyList");
