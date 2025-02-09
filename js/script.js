@@ -36,7 +36,10 @@ function downloadNote() {
         return;
     }
 
-    let fileName = note.split(/\\s+/).slice(0, 3).join("_") || "nota"; // Primeras 3 palabras
+    let fileName = prompt("Introduce el nombre del archivo:"); // Pedir nombre al usuario
+    if (!fileName) {
+        return; // Cancelar si el usuario no introduce un nombre
+    }
     fileName = fileName.replace(/[^\\w\\d_-]/g, ""); // Remover caracteres especiales
     fileName += ".txt";
 
@@ -47,8 +50,9 @@ function downloadNote() {
     link.click();
 
     addToHistory(fileName);
-    showHistory();  // <-- Se actualiza la vista del historial inmediatamente
+    showHistory();
 }
+
 
 
 function searchWord() {
